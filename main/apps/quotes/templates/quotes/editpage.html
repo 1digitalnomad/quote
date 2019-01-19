@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+
+    <style>
+        .header {
+                display: inline-block;
+                margin-top: 25px;
+            }
+        h2 {
+                display: inline-block;
+                margin-right: 350px;
+            }
+        .btn {
+            margin-top: 15px;
+        }
+
+        .navbar {
+            padding: 30px;
+            margin-bottom: 20px;
+        }
+    </style>
+
+    <title>Edit Account</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <!-- Navbar content -->
+    </nav>
+    <div class="container">
+    <div class="container">
+        <div class="header">
+            <h2>Edit My Account</h2>
+            <a href="{% url 'quotes:dashboard' %}">Back</a>
+            <a class="btn btn-primary" href="{% url 'users:logout' %}">Log Out</a>
+        </div>
+    </div>
+    <div class="form-container">
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <form action="{% url 'quotes:update' user_info.id %}" method="POST">
+            {% csrf_token %}
+            First Name: <input type="text" name="first_name" value="{{ user_info.first_name }}">
+            <br>
+            Last Name: <input type="text" name="last_name" value="{{ user_info.last_name}}">
+            <br>
+            Email: <input type="text" name="email" value="{{ user_info.email }}">
+            <br>
+            <input class="btn btn-primary" type="submit" value="Update">
+        </form>
+    </div>
+    </div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
